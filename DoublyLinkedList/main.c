@@ -6,7 +6,7 @@ int main() {
     construct(list);
     insert(list, "Hello", 0);
     insert(list, "World", 0);
-    insert(list, "Bitch", 2);
+    insert(list, "Dude", 2);
     printList(list);
     printf("%d", find(list, "Hello"));
     return 0;
