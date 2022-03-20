@@ -11,9 +11,9 @@ struct DLL {
 };
 
 void construct(struct DLL *list);
-int insert(struct DLL *list, char *data, int index);
+void insert(struct DLL *list, char *data, int index);
 int find(struct DLL *list, char *data);
-int get(struct DLL *list, int index);
-int delete(char *data);
+char *get(struct DLL *list, int index);
+char *delete(struct DLL *list, int index);
 void printList(struct DLL *list);
 

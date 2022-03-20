@@ -8,11 +8,11 @@ void construct(struct DLL *list) {
     list->tail = 0;
     list->size = 0;
 }
-// Insert node with data at index, -1 if index not in list
-int insert(struct DLL *list, char *data, int index) {
+
+void insert(struct DLL *list, char *data, int index) {
     if (index > list->size) {
-        printf("Can't insert data at index %d on list of size %d", index, list->size);
-        return -1;
+        printf("Can't insert data at index %d on list of size %d\n", index, list->size);
+        return;
     }
     char *newData = malloc(strlen(data));
     strcpy(newData, data);
@@ -22,7 +22,7 @@ int insert(struct DLL *list, char *data, int index) {
         list->head = newNode;
         list->tail = list->head;
         list->size = 1;
-        return 0;
+        return;
     }
     struct node *cursor = list->head;
     for (int i = 0; i < index; i++) {
@@ -44,10 +44,8 @@ int insert(struct DLL *list, char *data, int index) {
         cursor->prev = newNode;
     }
     list->size++;
-    return 0;
 }
 
-// Returns index of data, -1 if not in list
 int find(struct DLL *list, char *data) {
     struct node *cursor = list->head;
     int index = 0;
@@ -61,7 +59,7 @@ int find(struct DLL *list, char *data) {
     return -1;
 }
 
-int get(struct DLL *list, int index) {
+char *get(struct DLL *list, int index) {
     struct node *cursor = list->head;
     if (index >= list->size) {
         return 0;
@@ -72,8 +70,37 @@ int get(struct DLL *list, int index) {
     return cursor->data;
 }
 
-int delete(char *data) {
-    return -1;
+char *delete(struct DLL *list, int index) {
+    if (index >= list->size) {
+        printf("Cannot remove given index from list (Out of Bounds Error)\n");
+        return 0;
+    }
+    struct node *cursor = list->head;
+    for (int i = 0; i < index; i++) {
+        cursor = cursor->next;
+    }
+    char *data = cursor->data;
+    if (cursor == list->head) {
+        if (list->size == 1) {
+            list->head = 0;
+            list->tail = 0;
+        } else {
+            cursor->next->prev = cursor->prev;
+            list->head = list->head->next;
+            list->head->prev = 0;
+        }
+    } else {
+        cursor->prev->next = cursor->next;
+        if (cursor->next) {
+            cursor->next->prev = cursor->prev;
+        } else {
+            list->tail = list->tail->prev;
+            list->tail->next = 0;
+        }
+    }
+    list->size--;
+    free(cursor);
+    return data;
 }
 
 void printList(struct DLL *list) {
