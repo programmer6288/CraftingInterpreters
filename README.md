@@ -1,2 +1,2 @@
-# CraftingInterpreters
-This is the repository I am using to store my progress as I read through the Crafting Interpreters book and do its projects. 
+# Crafting Interpreters Exercises
+This is the repository I am using to store my progress as I read through the Crafting Interpreters book and do its exercises. I will try to document my progress throughout this README.
