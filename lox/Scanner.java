@@ -75,7 +75,7 @@ class Scanner {
                 break;
             case '/':
                 if (match('/')) {
-                    while (peek() != '\n' && !isAtEnd()) {
+                    while (peek(0) != '\n' && !isAtEnd()) {
                         advance();
                     }
                 } else {
@@ -100,7 +100,7 @@ class Scanner {
     }
 
     private void identifier() {
-        while (isAlphaNumeric(peek())) {
+        while (isAlphaNumeric(peek(0))) {
             advance();
         }
         if (keywords.containsKey(source.substring(start, current))) {
@@ -111,8 +111,8 @@ class Scanner {
     }
 
     private void string() {
-        while (peek() != '"' && !isAtEnd()) {
-            if (peek() == '\n') {
+        while (peek(0) != '"' && !isAtEnd()) {
+            if (peek(0) == '\n') {
                 line++;
             }
             advance();
@@ -130,13 +130,13 @@ class Scanner {
     }
 
     private void number() {
-        while (isDigit(peek())) {
+        while (isDigit(peek(0))) {
             advance();
         }
         // TODO: make sure that this checks for end of file.
-        if (peek() == '.' && (current + 1 < source.length() && isDigit(source.charAt(current + 1)))) {
+        if (peek(0) == '.' && isDigit(peek(1))) {
             advance();
-            while (isDigit(peek())) {
+            while (isDigit(peek(0))) {
                 advance();
             }
         }
@@ -155,11 +155,11 @@ class Scanner {
         return true;
     }
 
-    private char peek() {
-        if (isAtEnd()) {
+    private char peek(int offset) {
+        if (current + offset >= source.length()) {
             return 0;
         }
-        return source.charAt(current);
+        return source.charAt(current + offset);
     }
 
     private char advance() {
