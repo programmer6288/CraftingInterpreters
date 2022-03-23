@@ -100,7 +100,7 @@ class Scanner {
     }
 
     private void identifier() {
-        while (isAlpha(peek())) {
+        while (isAlphaNumeric(peek())) {
             advance();
         }
         if (keywords.containsKey(source.substring(start, current))) {
