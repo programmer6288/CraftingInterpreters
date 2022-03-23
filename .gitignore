@@ -1,3 +1,4 @@
 .vscode
 **/testlist.dSYM
 .DS_Store
+.class

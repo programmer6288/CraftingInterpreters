@@ -1,0 +1,7 @@
+This is a list of extra features that I could implement in the Lox interpreter:
+
+1. String concatenation between numbers and strings (currently only supported between two strings)
+2. Better error handling
+3. Implementing do-while loops
+4. Implement more arithmetic operators like bitwise (and, or, not), shifting, and modulo
+5. Implement more conditional operators (like ternary ?)
